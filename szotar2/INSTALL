@@ -1,0 +1,29 @@
+Glosary Install Instructions
+===========================
+
+1. Copy this directory to a public location on your web server.
+
+2. Create data/glosar.txt and data/history.txt and give write acces on them to the web
+server.
+
+3. Rename config.inc.php.dist to config.inc.php
+
+4. Look at config.inc.php to see how you can customize the glossary.
+
+5. You can customize the "help.php" and add info about the usage if this page
+
+
+That's about it.
+
+---------
+
+This page is designed to be integrated into a mediawiki .  
+It uses the mediawiki login, but it may be hooked into other system.
+
+You can see an example installation here: http://i18n.ro/Glosar
+
+--
+You can update the POT file using
+xgettext --from-code utf-8 -o po/tm.pot -L PHP *.php js/*.php
+
+

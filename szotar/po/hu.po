@@ -1,0 +1,459 @@
+# Hungarian translation of glosar
+# Copyright (C) 2009, Free Software Foundation, Inc.
+# This file is distributed under the same license as the glosar package.
+#
+# Gabor Kelemen <kelemeng@gnome.hu>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: glosar head\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-31 22:56+0200\n"
+"PO-Revision-Date: 2009-05-20 01:50+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+"Language-Team: Hungarian <ubuntu-l10n-hu ubuntu com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../changelog.php:14
+msgid "Translation memory - Changelog"
+msgstr "Fordítási szótár - Változások"
+
+#: ../changelog.php:27 ../recent.php:60 ../report.php:88
+msgid "Back"
+msgstr "Vissza"
+
+#.
+#. * $prod_name - a string for this glosary name
+#. * $prod_ver - a string for the code version
+#.
+#: ../config.inc.php:19
+msgid "The glossary for our team"
+msgstr "Magyar fordítási segédszótár"
+
+#: ../config.inc.php:20
+msgid "N.N"
+msgstr "0.5"
+
+#: ../index.php:28
+msgid "Recent changes - RSS Feed"
+msgstr "Legfrissebb változások - RSS forrás"
+
+#: ../index.php:29
+msgid "Unfixed terms - RSS Feed"
+msgstr "Vitatott kifejezések - RSS forrás"
+
+# fixme: http://szotar.fsf.hu/glosar-search.xml
+#: ../index.php:30
+msgid "http://localhost/glosar/glosar-search.xml"
+msgstr "http://potter.iit.uni-miskolc.hu/~sianis/glossary/glosar-search.xml"
+
+#: ../index.php:30
+msgid "Terminology search"
+msgstr "Terminológiakeresés"
+
+#: ../index.php:52
+msgid ""
+"You are free to modify the content. Please login, for a better team "
+"communication."
+msgstr ""
+"Szabadon módosíthatod a tartalmat. Jelentkezz be a jobb csapatmunka "
+"érdekében!"
+
+#: ../index.php:54
+msgid "You need to log in in order to modify the content."
+msgstr "Be kell jelentkezned a tartalom módosításához."
+
+#: ../index.php:57
+msgid "Changes are made under the username: <i>"
+msgstr "A módosítások ezen a felhasználónéven készülnek: <i>"
+
+#: ../index.php:65
+msgid "Term:"
+msgstr "Kifejezés:"
+
+#: ../index.php:67
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: ../index.php:71
+msgid "Edit translation"
+msgstr "Fordítás szerkesztése"
+
+#: ../index.php:72
+msgid ""
+"Please use this order: <i>verb inf.</i>, <i>noun</i> (ex: to edit, edit)"
+msgstr ""
+"Használd ezt a sorrendet: <i>ige</i>, <i>főnév</i> (például: szerkeszteni, "
+"szerkesztés)"
+
+#: ../index.php:75
+msgid "Meta information:"
+msgstr "Metainformációk:"
+
+#: ../index.php:78
+msgid ""
+"<li><tt>[[WikiWord]]</tt> create a link to a wiki page, used for "
+"discussions</li>"
+msgstr ""
+"<li><tt>[[WikiSzó]]</tt> hivatkozás készítése wikioldalra, a szó "
+"megvitatásához</li>"
+
+#: ../index.php:79
+msgid ""
+"<li><tt  class='term_locked'>!</tt> - lock a <span "
+"class='term_locked'>stable</span> translation</li>"
+msgstr ""
+"<li><tt  class='term_locked'>!</tt> - egy <span class='term_locked'>stabil</"
+"span> fordítás zárolása</li>"
+
+#: ../index.php:80
+msgid ""
+"<li><tt class='term_debate'>?</tt> - tag the translation as fuzzy <span "
+"class='term_debate'>debate</span></li>"
+msgstr ""
+"<li><tt class='term_debate'>?</tt> - a fordítás megjelölése nem véglegesként "
+"<span class='term_debate'>vitára</span></li>"
+
+#: ../index.php:87
+msgid "Cancel"
+msgstr "Mégse"
+
+#: ../index.php:95
+msgid "Save"
+msgstr "Mentés"
+
+#: ../index.php:105
+msgid "Delete"
+msgstr "Törlés"
+
+#: ../index.php:120
+msgid "About this dictionary"
+msgstr "A fordítási segédszótárról"
+
+#: ../index.php:122
+msgid ""
+"This glosary is used for translationg „free” and „open source” software by "
+"the localization teams of our language. "
+msgstr ""
+"Ezt a szótárat „szabad” és „nyílt forrású” szoftverek fordításához "
+"használják magyar fordítócsapatok. "
+
+#: ../index.php:123
+#, php-format
+msgid ""
+"Everybody can contribute, the system is based on the <a href=%s>Wiki</a> "
+"idea. (each change is saved)."
+msgstr ""
+"Mindenki közreműködhet, a rendszert a <a href=%s>Wiki</a> ötletén alapul. "
+"(minden változtatás mentésre kerül)."
+
+#: ../index.php:125
+msgid "This page requires JavaScript suport."
+msgstr "Az oldal működéséhez JavaScript támogatás szükséges."
+
+#: ../index.php:127
+msgid "Downloading raw data"
+msgstr "Nyers adatok letöltése"
+
+#: ../index.php:128
+#, php-format
+msgid ""
+"The content is licenced under <a href=%s>GPL</a> and can be downloaded from "
+"here:"
+msgstr "A tartalom licence <a href=%s>GPL</a> és innen letölthető:"
+
+#: ../index.php:130
+msgid "Translation teams for our language"
+msgstr "Magyar fordítócsapatok"
+
+#: ../index.php:132
+msgid "http://wiki.services.openoffice.org/wiki/Languages"
+msgstr "http://hu.openoffice.org/"
+
+#: ../index.php:132
+msgid "OpenOffice.org"
+msgstr "OpenOffice.org"
+
+#: ../index.php:133
+msgid "https://wiki.mozilla.org/Category:L10n_Teams"
+msgstr "https://wiki.mozilla.org/L10n:Teams:hu"
+
+#: ../index.php:133
+msgid "Mozilla"
+msgstr "Mozilla"
+
+#: ../index.php:134
+msgid "http://l10n.gnome.org/teams/"
+msgstr "http://l10n.gnome.org/languages/hu/"
+
+#: ../index.php:134
+msgid "GNOME"
+msgstr "GNOME"
+
+#: ../index.php:135
+msgid "http://i18n.kde.org/teams-list.php"
+msgstr "http://i18n.kde.org/team-infos.php?teamcode=hu"
+
+#: ../index.php:135
+msgid "KDE"
+msgstr "KDE"
+
+#: ../index.php:136
+msgid "http://i18n.xfce.org/wiki/language_maintainers"
+msgstr "http://i18n.xfce.org/wiki/team_hu"
+
+#: ../index.php:136
+msgid "Xfce"
+msgstr "Xfce"
+
+#: ../index.php:137
+msgid "https://translations.launchpad.net/+groups/ubuntu-translators"
+msgstr "https://launchpad.net/~ubuntu-l10n-hu"
+
+#: ../index.php:137
+msgid "Ubuntu"
+msgstr "Ubuntu"
+
+#: ../index.php:138
+msgid "http://en.opensuse.org/OpenSUSE_Localization_Teams"
+msgstr ""
+"http://hu.opensuse.org/%C3%9Cdv%C3%B6z%C3%B6lj%C3%BCk_az_openSUSE.org_oldal%"
+"C3%A1n"
+
+#: ../index.php:138
+msgid "OpenSUSE"
+msgstr "OpenSUSE"
+
+#: ../index.php:139
+msgid "https://translate.fedoraproject.org/teams/"
+msgstr "https://translate.fedoraproject.org/teams/hu"
+
+#: ../index.php:139
+msgid "Fedora"
+msgstr "Fedora"
+
+#: ../index.php:140
+msgid "http://debian.org/international/"
+msgstr "http://debian.org/international/Hungarian"
+
+#: ../index.php:140
+msgid "Debian"
+msgstr "Debian"
+
+#: ../index.php:142
+msgid "Source code"
+msgstr "Forráskód"
+
+#: ../index.php:143
+#, php-format
+msgid ""
+"Source code is licensed under <a href=%s>GPL</a>, you can dowload the latest "
+"version from <a href=%s>here</a>."
+msgstr ""
+"A forráskód licence <a href=%s>GPL</a>, a legfrissebb változat letölthető <a "
+"href=%s>innen</a>."
+
+#: ../index.php:150 ../recent.php:27
+msgid "Recent changes"
+msgstr "Legutóbbi változások"
+
+#: ../index.php:151
+msgid "unfixed terms"
+msgstr "vitatott kifejezések"
+
+#: ../index.php:152
+msgid "fixed terms"
+msgstr "rögzített kifejezések"
+
+#: ../index.php:153
+msgid "unsorted terms"
+msgstr "rendezetlen kifejezések"
+
+#: ../index.php:154
+msgid "Changelog"
+msgstr "Változások"
+
+#: ../index.php:155
+msgid "Export to po"
+msgstr "Exportálás po fájlba"
+
+#: ../recent.php:14
+msgid "Tranlation memory - recent changes"
+msgstr "Fordítási szótár - legutóbbi változások"
+
+#: ../recent.php:28
+msgid "Date"
+msgstr "Dátum"
+
+#: ../recent.php:28 ../report.php:62 ../js/Glossary.php:25
+#: ../js/Glossary.php:134
+msgid "Term"
+msgstr "Kifejezés"
+
+#: ../recent.php:28 ../report.php:62 ../js/Glossary.php:25
+#: ../js/Glossary.php:134
+msgid "Translation"
+msgstr "Fordítás"
+
+#: ../recent.php:28 ../js/Glossary.php:134
+msgid "User / IP"
+msgstr "Felhasználó/IP"
+
+#: ../recent.php:57
+#, php-format
+msgid "(%d revision not displayed)"
+msgid_plural "(%d revisions not displayed)"
+msgstr[0] "(%d változat nem jelenik meg)"
+msgstr[1] "(%d változat nem jelenik meg)"
+
+#: ../recent.rss2.php:21
+#, php-format
+msgid "%s - Recent"
+msgstr "%s - legfrissebb"
+
+#: ../recent.rss2.php:24
+msgid "Last 15 modified terms"
+msgstr "Utolsó 15 módosított kifejezés"
+
+#: ../recent.rss2.php:37 ../unfixed.rss2.php:32
+msgid "Link to glossary"
+msgstr "Hivatkozás a szótárra"
+
+#: ../recent.rss2.php:38 ../unfixed.rss2.php:33
+msgid "Link to wiki"
+msgstr "Hivatkozás a wikire"
+
+#: ../recent.rss2.php:39 ../unfixed.rss2.php:34
+msgid "Link to Open-tran.eu"
+msgstr "Hivatkozás az open-tran.eu-ra"
+
+#: ../recent.rss2.php:40 ../unfixed.rss2.php:35
+msgid "Term: "
+msgstr "Kifejezés: "
+
+#: ../recent.rss2.php:41 ../unfixed.rss2.php:36
+msgid "Translated: "
+msgstr "Fordítás: "
+
+#: ../recent.rss2.php:42 ../unfixed.rss2.php:37
+msgid "Context: "
+msgstr "Kontextus: "
+
+#: ../recent.rss2.php:43
+msgid "Date: "
+msgstr "Dátum: "
+
+#: ../recent.rss2.php:44
+msgid "Author: "
+msgstr "Szerző: "
+
+#: ../report.php:13 ../report.php:24
+msgid "unfixed"
+msgstr "vitatott"
+
+#: ../report.php:17
+msgid "unsorted"
+msgstr "rendezetlen"
+
+#: ../report.php:20
+msgid "fixed"
+msgstr "rögzített"
+
+#: ../report.php:48
+#, php-format
+msgid "Translation memory - Report for %s terms"
+msgstr "Fordítási szótár - Jelentés a %s kifejezésekhez"
+
+#: ../report.php:61
+#, php-format
+msgid "Report for %s"
+msgstr "Jelentés a %s kifejezésekhez"
+
+#: ../report.php:62 ../js/Glossary.php:134
+msgid "Context"
+msgstr "Kontextus"
+
+#. Translator: %s is one of fixed, unfixed
+#: ../report.php:85
+#, php-format
+msgid "%d %s term"
+msgid_plural "%d %s terms"
+msgstr[0] "(%d %s kifejezés)"
+msgstr[1] "(%d %s kifejezés)"
+
+#: ../unfixed.rss2.php:21
+#, php-format
+msgid "%s - Random unfixed"
+msgstr "%s - véletlen vitatott"
+
+#: ../unfixed.rss2.php:24
+msgid "Random unfixed terms"
+msgstr "Véletlen vitatott kifejezések"
+
+#: ../js/Glossary.php:25
+msgid "Meta info"
+msgstr "Metainformációk"
+
+#: ../js/Glossary.php:67
+msgid "Zero results."
+msgstr "Nincs találat."
+
+#: ../js/Glossary.php:104
+msgid "nothing found"
+msgstr "nincs találat"
+
+#: ../js/Glossary.php:134
+msgid "Revision date"
+msgstr "Változat dátuma"
+
+#: ../js/Glossary.php:191
+#, php-format
+msgid "%.1f%% fixed"
+msgid_plural "%.1f%% fixed"
+msgstr[0] "%.1f%% rögzített"
+msgstr[1] "%.1f%% rögzített"
+
+#: ../js/Glossary.php:193
+#, php-format
+msgid "%.1f%% unfixed"
+msgid_plural "%.1f%% unfixed"
+msgstr[0] "%.1f%% vitatott"
+msgstr[1] "%.1f%% vitatott"
+
+#: ../js/Glossary.php:195
+#, php-format
+msgid "%.1f%% unsorted"
+msgid_plural "%.1f%% unsorted"
+msgstr[0] "%.1f%% rendezetlen"
+msgstr[1] "%.1f%% rendezetlen"
+
+#: ../js/Glossary.php:205
+#, php-format
+msgid "( %d term )"
+msgid_plural "( %d terms )"
+msgstr[0] "(%d kifejezés) "
+msgstr[1] "(%d kifejezés) "
+
+#: ../glosar-search.xml.in.h:1
+msgid "Localization terminology dictionary"
+msgstr "Fordítási terminológiaszótár"
+
+#: ../glosar-search.xml.in.h:2
+msgid "Terminology dictionary to help in software translation"
+msgstr "Terminológiai szótár szoftverfordításokhoz"
+
+#. Translate this to the search URL of this tm installation
+#: ../glosar-search.xml.in.h:4
+msgid "http://localhost/glosar/index.php?keyword={searchTerms}"
+msgstr "http://potter.iit.uni-miskolc.hu/~sianis/glossary/index.php?keyword={searchTerms}"
+
+#. Translate this to the suggestions URL of this tm installation
+#: ../glosar-search.xml.in.h:6
+msgid "http://localhost/glosar/suggest.php?term={searchTerms}"
+msgstr "http://potter.iit.uni-miskolc.hu/~sianis/glossary/suggest.php?term={searchTerms}"
+
+#~ msgid "Help"
+#~ msgstr "Súgó"
