@@ -170,7 +170,7 @@ jQuery(document).ready(function($){
       if( value == 'forward' ){
           panelNum = current.is( panels.last() ) ? 1: currentValue + 1;
       } else if(value == 'backward'){
-          panelNum = current.is( panels.first() ) ? 1: currentValue - 1;
+          panelNum = current.is( panels.first() ) ? panels.length: currentValue - 1;
       } else{
           panelNum = value;
       }
@@ -187,8 +187,8 @@ jQuery(document).ready(function($){
 	  newSpan.addClass('current');
 
 	  // Fade in / out
-      next.hide().css({ 'z-index': 100 });
-      current.css({ 'z-index': 99 });
+      next.hide().css({ 'z-index':1 });
+      current.css({ 'z-index':0 });
 
 	  next.fadeIn( 1200, 'swing', function() {
 		  current.hide();

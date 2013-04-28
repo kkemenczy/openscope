@@ -2018,6 +2018,7 @@ search results	Találatok	!
 search string	keresendő karakterlánc	!
 search term	keresőkifejezés	!
 search vector	keresővektor	!
+seat	munkaállomás	!
 secondary axis	másodlagos tengely	!
 section	szakasz	!
 sector	szektor	!

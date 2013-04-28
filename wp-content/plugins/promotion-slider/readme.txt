@@ -5,7 +5,7 @@ Donate link: http://www.orderofbusiness.net/payments/
 Tags: slideshow, promotions, slider, javascript slider, jquery slider, carousel, featured content, news, gallery, banners, image rotation, images, rotate, auto, autoplay, shortcode, slide, ad, ad gallery, advertisement, ads, media, pictures, custom post types, thumbnails
 Requires at least: 3.2
 Tested up to: 3.5.1
-Stable Tag: 3.3.3
+Stable Tag: 3.3.4
 
 Promotion Slider is a jQuery slideshow populated by the promotions you enter into the WordPress admin area.
 
@@ -180,6 +180,12 @@ Here is a list of all the hooks available to advanced users:
 
 == Changelog ==
 
+= 3.3.4 =
+* Toned down z-index for slider transition to minimize menu overlap issues.
+* Fixed bug where slider shortcode attribute wasn't working.
+* Changed time delay option to a numeric input.
+* Fixed bug where navigating back one slide at a time would fail when you came to the first slide.
+
 = 3.3.3 =
 * Bug fix for JS in IE - removed accidentally committed console.log line
 
@@ -305,6 +311,9 @@ Here is a list of all the hooks available to advanced users:
 * Promotion Slider is now available for download!
 
 == Upgrade Notice ==
+
+= 3.3.4 =
+Fixed issue where slider shortcode attribute wasn't working, fix to minimize menu overlap issues and changed time delay option to a numeric input.
 
 = 3.3.3 =
 Bug fix for JS in IE

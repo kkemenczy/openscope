@@ -103,19 +103,13 @@
                                 <input type="radio" name="promotion_slider_options[auto_advance]" value="auto_advance" <?php if( $options['auto_advance'] == 'auto_advance' ) echo 'checked="checked"'; ?> />
                                 <label><?php _e('On', 'promotion-slider'); ?></label><br />
 
-                                <input type="radio" name="promotion_slider_options[auto_advance]" value="no_auto_advance" <?php if( 	$options['auto_advance'] == 'no_auto_advance' ) echo 'checked="checked"'; ?> />
+                                <input type="radio" name="promotion_slider_options[auto_advance]" value="no_auto_advance" <?php if( $options['auto_advance'] == 'no_auto_advance' ) echo 'checked="checked"'; ?> />
                                 <label><?php _e('Off', 'promotion-slider'); ?></label>
                             </p>
 
                             <p>
-                                <strong><?php _e('Set Slider Time Delay:', 'promotion-slider'); ?> </strong>
-                                <select name="promotion_slider_options[time_delay]">
-                                    <?php for($i=3; $i<=15; $i++): ?>
-                                        <option value="<?php echo $i; ?>"<?php if( $options['time_delay'] == $i ) echo 'selected="selected"'; ?>>
-                                            <?php echo $i; ?> <?php _e('Seconds', 'promotion-slider'); ?>
-                                        </option>
-                                    <?php endfor; ?>
-                                </select>
+                                <strong><?php _e('Set Slider Time Delay:', 'promotion-slider'); ?> </strong><br />
+                                <input type="number" min="1" step="1" name="promotion_slider_options[time_delay]" value="<?php echo promotion_slider( 'option', 'time_delay' ); ?>" /> <?php _e('Seconds', 'promotion-slider'); ?>
                             </p>
 
                             <p>

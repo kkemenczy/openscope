@@ -66,7 +66,7 @@ function child_do_content() { ?>
 </ul>
 
 <h1>Kapcsolat</h1>
-<p>Ha elakadtál, vedd fel velünk a <a href="/kapcsolat/" target="_new">kapcsolatot</a>.</p>	
+<p>Csatlakozz a <a href="https://groups.google.com/forum/?fromgroups#!forum/mozhun" target="_new">közösségi csoporthoz</a> vedd fel velünk a <a href="/kapcsolat/" target="_new">kapcsolatot</a>.</p>	
 
 <?php }
 genesis();

@@ -3,7 +3,7 @@
  * Plugin Name: Promotion Slider
  * Plugin URI: http://www.orderofbusiness.net/wordpress-plugins/promotion-slider/
  * Description: This plugin creates a special post type called 'Promotions' that it uses to populate the carousel.  Just use the shortcode [promoslider] to display the slider on your site.  Be sure to check the <a href="http://wordpress.org/extend/plugins/promotion-slider/faq/" target="_blank">user guide</a> for more information on what this plugin can really do!
- * Version: 3.3.3
+ * Version: 3.3.4
  * Author: Micah Wood
  * Author URI: http://micahwood.me
  * License: GPL3
@@ -24,7 +24,7 @@ if ( version_compare( PHP_VERSION, '5.2', '<' ) ) {
 }
 
 // DEFINE CONSTANTS
-define( 'PROMOSLIDER_VER', '3.3.3' );
+define( 'PROMOSLIDER_VER', '3.3.4' );
 define( 'PROMOSLIDER_URL', plugin_dir_url( __FILE__ ) );
 define( 'PROMOSLIDER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PROMOSLIDER_BASENAME', plugin_basename( __FILE__ ) );
@@ -32,11 +32,13 @@ define( 'PROMOSLIDER_BASENAME', plugin_basename( __FILE__ ) );
 define( 'PROMOSLIDER_FILE', __FILE__ );
 
 // INCLUDE FILES
-require( dirname(__FILE__).'/classes/post_type.php' );
-require( dirname(__FILE__).'/classes/register_tax.php' );
-require( dirname(__FILE__).'/classes/legacy.php' );
-require( dirname(__FILE__).'/classes/array_processing.php' );
-require( dirname(__FILE__).'/includes/functions.php' );
+require( dirname( __FILE__ ) . '/classes/post_type.php' );
+require( dirname( __FILE__ ) . '/classes/register_tax.php' );
+require( dirname( __FILE__ ) . '/classes/legacy.php' );
+require( dirname( __FILE__ ) . '/classes/array_processing.php' );
+require( dirname( __FILE__ ) . '/includes/class-api.php' );
+require( dirname( __FILE__ ) . '/includes/class-options.php' );
+require( dirname( __FILE__ ) . '/includes/functions.php' );
 
 // BEGIN MAIN CLASS
 if( !class_exists('promo_slider') ){
@@ -86,12 +88,12 @@ if( !class_exists('promo_slider') ){
 			new wordpress_custom_taxonomy( $this->taxonomy, $this->post_type, array(
 					'singular' => __( 'Slider', 'promotion-slider' ),
 				    'slug' => 'promotions',
-					'args' => array( 'hierarchical' => TRUE )
+					'args' => array( 'hierarchical' => true )
 				)
 			);
 
 			// Add support for translations
-			load_plugin_textdomain( 'promotion-slider', FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+			load_plugin_textdomain( 'promotion-slider', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
 			if ( is_admin() ) {
 
@@ -99,7 +101,7 @@ if( !class_exists('promo_slider') ){
 				register_activation_hook( __FILE__, array($this, 'activate') );
 
 				// Check if plugin has been updated, if so run activation function
-				if( $this->get_options()->version != PROMOSLIDER_VER )
+				if( promotion_slider( 'option', 'version' ) != PROMOSLIDER_VER )
 					$this->activate();
 
 				// Initiate key components
@@ -213,8 +215,8 @@ if( !class_exists('promo_slider') ){
 			// Get plugin options
 			$options = $this->get_options();
 			// Load javascript
-			$load_js_in_footer = ( $options->load_js_in == 'footer' ) ? TRUE : FALSE;
-			wp_enqueue_script( 'promoslider_main', plugins_url( '/js/promoslider.js', __FILE__ ), array( 'jquery' ), FALSE, $load_js_in_footer );
+			$load_js_in_footer = ( $options->load_js_in == 'footer' ) ? true : false;
+			wp_enqueue_script( 'promoslider_main', plugins_url( '/js/promoslider.js', __FILE__ ), array( 'jquery' ), false, $load_js_in_footer );
 
 			// Localize plugin options
 			$data = array('version' => PROMOSLIDER_VER);
@@ -255,7 +257,7 @@ if( !class_exists('promo_slider') ){
 			// See if my plugin is in the array
 			$key = array_search( $my_plugin, $active_plugins );
 			// If my plugin was found
-			if( $key !== FALSE ){
+			if( $key !== false ){
 				// Remove it from the array
 				unset( $active_plugins[$key] );
 				// Reset keys in the array
@@ -292,7 +294,7 @@ if( !class_exists('promo_slider') ){
 			// Save meta data
 			foreach($data as $meta){
 				// Get current meta
-				$current = get_post_meta($post_id, $meta, TRUE);
+				$current = get_post_meta($post_id, $meta, true);
 				// Get new meta
 				$new = isset( $_POST[$meta] ) ? $_POST[$meta] : false;
 				// If the new meta is empty, delete the current meta
@@ -303,176 +305,34 @@ if( !class_exists('promo_slider') ){
             return $post_id;
 		}
 
-		function show_slider_test( $atts ){
-			global $post;
-			// Get plugin default options
-			$options = $this->get_options();
-			// Get combined and filtered attribute list
-			$options = shortcode_atts( array(
-                'id' => false,
-                'width' => false,
-                'height' => false,
-                'post_type' => $this->post_type,
-                'category' => false,
-                'slider' => false,
-                'numberposts' => -1,
-                'auto_advance' => $options->auto_advance,
-                'time_delay' => $options->time_delay,
-                'display_title' => $options->display_title,
-                'display_image' => $options->display_image,
-                'display_excerpt' => $options->display_excerpt,
-                'display_nav' => $options->display_nav,
-                'nav_style' => $options->nav_style,
-                'start_on' => $options->start_on,
-                'pause_on_hover' => $options->pause_on_hover ), $atts
-            );
-			// Validate options
-			//foreach( $options as $option => $value )
-				//$options[$option] = $this->validate_options( $option, $value );
-
-            if( isset( $options['slider'] ) ) {
-                $options['slider'] = $options['category'];
-            }
-
-			// Extract shortcode attributes
-			extract( $options );
-
-			// Create an array with default values that we can use to build our query
-			$query = array('numberposts' => $numberposts, 'post_type' => $post_type);
-
-			// If the post type is post or the default, set the category based on taxonomy.
-			if( $category ){
-				if( $query['post_type'] == $this->post_type ) $query[$this->taxonomy] = $category;
-				elseif( $query['post_type'] == 'post' ) $query['category_name'] = $category;
-			}
-
-			// Use the promoslider_query filter to customize the results returned.
-			$query = apply_filters('promoslider_query', $query);
-
-			// Use the promoslider_query_by_id filter to customize a query for a particular slider.
-			$query_by_id = apply_filters('promoslider_query_by_id', array('query' => $query, 'id' => $id));
-			$query = $query_by_id['query'];
-
-			if( has_filter('promoslider_custom_query_results') ) {
-				// Use the promoslider_custom_query_results to run your own query and return the results object to the slider
-				$promo_posts = apply_filters('promoslider_custom_query_results', $promo_posts);
-			} else {
-				// Run query and get posts
-				$promo_posts = get_posts( $query );
-			}
-
-			// If there are results, build slider.  Otherwise, don't show anything.
-			if( $promo_posts ){
-
-				// Initiate iteration counter
-				$i = 1;
-
-				// Setup thumbnail array if thumbnail nav is being used
-				if( $nav_style == 'thumbnails' )
-					$thumb_collection = array();
-
-				// Define the element id
-				$promoslider_id = ( $id ) ? 'id="' . $id . '"': false;
-
-				// Assign class to variable for easy access
-				$process = new promoslider_array_processing();
-
-				// Setup array containing classes for promoslider element
-				$promoslider_classes = array( 'promoslider', $start_on, $auto_advance, $nav_style );
-				// Prefix classes
-				$promoslider_classes = $process->array_prefix( $promoslider_classes, 'promoslider', '_' );
-				// Allow users to add / modify classes as needed
-				$promoslider_classes = apply_filters( 'promoslider_classes', $promoslider_classes, $id );
-				// Convert array to class attribute
-				$promoslider_classes = $process->array_to_class( $promoslider_classes );
-
-				// Define styles
-				$promoslider_styles = $process->array_to_style( array( 'width' => $width ) );
-				$collection_styles = $process->array_to_style( array( 'height' => $height ) );
-
-				// Begin Output
-				ob_start(); ?>
-
-				<div <?php echo $promoslider_id . $promoslider_classes . $promoslider_styles; ?>>
-
-					<?php do_action( 'before_promoslider', $id ); ?>
-
-					<div class="promo_slider_nav tabbed_ps_nav slider_selections"></div>
-
-					<div class="promoslider_collection" <?php echo $collection_styles; ?>>
-
-						<?php if ( $time_delay ) echo '<span class="promoslider_time_delay">'.$time_delay.'</span>'; ?>
-
-					<?php foreach($promo_posts as $post): setup_postdata($post);
-							// Setup values to be passed to the promoslider_content action hook
-								// Get the title
-								$title = get_the_title();
-								// Get the excerpt
-								$excerpt = get_the_excerpt();
-								// Fetch image for slider
-								$image = $this->get_slider_image( $id );
-								// Fetch thumbnails for slider nav, if thumbnail nav is being used
-								if( $nav_style == 'thumbnails' )
-									$thumb_collection[] = $this->get_slider_thumb( $title );
-								// Fetch link settings
-								extract( $this->fetch_link_settings() );
-
-								// Store all the values in an array and pass it to the promoslider_content action
-								$values = compact('id', 'title', 'excerpt', 'image', 'destination_url', 'target', 'disable_links', 'display_title', 'display_excerpt'); ?>
-
-							<div class="promoslider_panel promoslider_panel-<?php echo $i; ?>">
-
-								<span class="promoslider_panel_title"><?php echo $title; ?></span>
-
-								<?php do_action( 'promoslider_content', $values ); ?>
-
-							</div>
-
-							<?php $i++; ?>
-						<?php endforeach; ?>
-
-					</div><!-- end .promoslider_collection -->
-
-					<?php if( $i > 1 && $display_nav ) do_action( 'promoslider_nav', 'numbers', $values ); ?>
-
-					<?php do_action( 'after_promoslider', $id ); ?>
-
-				</div> <!-- end .promoslider -->
-
-				<?php
-
-				// Reset query so that comment forms work properly
-				wp_reset_query();
-
-				// End Output
-				return ob_get_clean();
-
-			}
-		}
-
 		function show_slider( $atts ){
 			global $post;
 			// Get plugin options
 			$options = $this->get_options();
 			// Get combined and filtered attribute list
 			$options = shortcode_atts( array(
-				'id' => NULL,
-				'width' => NULL,
-				'height' => NULL,
+				'id' => false,
+				'width' => false,
+				'height' => false,
 				'post_type' => $this->post_type,
-				'category' => NULL,
+				'category' => false,
+				'slider' => false,
 				'numberposts' => -1,
-				'start_on' => property_exists( $options, 'start_on' ) ? $options->start_on : 'first',
-				'auto_advance' => property_exists( $options, 'auto_advance' ) ? $options->auto_advance : true,
-				'time_delay' => property_exists( $options, 'time_delay' ) ? $options->time_delay : 6,
-				'display_nav' => property_exists( $options, 'display_nav' ) ? $options->display_nav : true,
-				'display_title' => property_exists( $options, 'display_title' ) ? $options->display_title : true,
-				'display_excerpt' => property_exists( $options, 'display_excerpt' ) ? $options->display_excerpt : true,
-				'pause_on_hover' => property_exists( $options, 'pause_on_hover' ) ? $options->pause_on_hover : false
+				'start_on' => promotion_slider( 'option', 'start_on', 'first' ),
+				'auto_advance' => promotion_slider( 'option', 'auto_advance', 'auto_advance' ),
+				'time_delay' => promotion_slider( 'option', 'time_delay', 6 ),
+				'display_nav' => promotion_slider( 'option', 'display_nav', 'fancy' ),
+				'display_title' => promotion_slider( 'option', 'display_title', 'fancy'),
+				'display_excerpt' => promotion_slider( 'option', 'display_excerpt', 'none' ),
+				'pause_on_hover' => promotion_slider( 'option', 'pause_on_hover', 'no_pause' ),
 			), $atts);
 			// Validate options
 			foreach( $options as $option => $value )
 				$options[$option] = $this->validate_options( $option, $value );
+
+			if( $options['slider'] ) {
+				$options['category'] = $options['slider'];
+			}
 
 			// Extract shortcode attributes
 			extract( $options );
@@ -603,7 +463,7 @@ if( !class_exists('promo_slider') ){
 		function get_slider_thumb( $title ){
 			global $post;
 			// If functionality or image doesn't exist, go ahead and terminate
-			if( ! function_exists('has_post_thumbnail') || ! has_post_thumbnail($post->ID) ) return FALSE;
+			if( ! function_exists('has_post_thumbnail') || ! has_post_thumbnail($post->ID) ) return false;
 			// Filter allows for use of particular thumbnail size in the slider
 			$thumb_size = apply_filters('promoslider_thumb_size', 'thumbnail');
 			// Return the appropriate sized image with corrected title attribute
@@ -613,14 +473,14 @@ if( !class_exists('promo_slider') ){
 		function fetch_link_settings(){
 			global $post;
 			// If the destination url is set by the user, use that.  Otherwise, use the permalink
-			$destination_url = get_post_meta($post->ID, '_promo_slider_url', TRUE);
+			$destination_url = get_post_meta($post->ID, '_promo_slider_url', true);
 			if( ! $destination_url )
 				$destination_url = get_permalink($post->ID);
 			// If the target attribute is set by the user, use that.  Otherwise, set it to _self
-			$target = get_post_meta($post->ID, '_promo_slider_target', TRUE);
+			$target = get_post_meta($post->ID, '_promo_slider_target', true);
 			if( ! $target ) $target = '_self';
 			// Setup the disable links variable
-			$disable_links = get_post_meta($post->ID, '_promo_slider_disable_links', TRUE);
+			$disable_links = get_post_meta($post->ID, '_promo_slider_disable_links', true);
 			return compact('destination_url', 'target', 'disable_links');
 		}
 
@@ -684,7 +544,7 @@ if( !class_exists('promo_slider') ){
 			// Get options from database
 			$options = get_option('promotion_slider_options');
 			// If nothing, return false
-			if( !$options ) return FALSE;
+			if( !$options ) return false;
 			// Otherwise, return the options as an object (my personal preference)
 			return (object) $options;
 		}
@@ -699,7 +559,7 @@ if( !class_exists('promo_slider') ){
 			// Validate options
 			foreach( $options as $option => $value ){
 				$options[$option] = $this->validate_options( $option, $value );
-				if( $value === FALSE ) unset($options[$option]);
+				if( $value === false ) unset($options[$option]);
 			}
 			// Return new options array
 			return $options;
@@ -707,41 +567,6 @@ if( !class_exists('promo_slider') ){
 
 		function validate_options( $option_name, $option_value ){
 			switch( $option_name ){
-				case 'version':
-					return PROMOSLIDER_VER;
-				case 'start_on':
-					if( in_array($option_value, array('first', 'random')) )
-						return $option_value;
-					break;
-				case 'auto_advance':
-					if( in_array($option_value, array('auto_advance', 'no_auto_advance')) )
-						return $option_value;
-					break;
-				case 'time_delay':
-					$option_value = (int) $option_value;
-					if( is_int($option_value) && $option_value >= 3 && $option_value <= 15 )
-						return $option_value;
-					break;
-				case 'display_nav':
-					if( in_array($option_value, array('none', 'default', 'fancy', 'links', 'thumb', 'tabbed')) )
-						return $option_value;
-					break;
-				case 'display_title':
-					if( in_array($option_value, array('none', 'default', 'fancy')) )
-						return $option_value;
-					break;
-				case 'display_excerpt':
-					if( in_array($option_value, array('none', 'excerpt')) )
-						return $option_value;
-					break;
-				case 'pause_on_hover':
-					if( in_array($option_value, array('pause', 'no_pause')) )
-						return $option_value;
-					break;
-				case 'load_js_in':
-					if( in_array($option_value, array('head', 'footer')) )
-						return $option_value;
-					break;
 				case 'post_type':
 					if( $option_value != $this->post_type && post_type_exists($option_value) )
 						return $option_value;
@@ -750,7 +575,12 @@ if( !class_exists('promo_slider') ){
 				case 'category':
 					if( term_exists($option_value) )
 						return $option_value;
-					return FALSE;
+					return false;
+				case 'slider':
+					if( term_exists( $option_value ) )
+						return $option_value;
+					return false;
+					break;
 				case 'id':
 					return $option_value;
 					break;
@@ -771,7 +601,7 @@ if( !class_exists('promo_slider') ){
 						return $option_value;
 					break;
 				default:
-					return FALSE;
+					return Promotion_Slider_Options::validate_option( $option_name, $option_value );
 			}
 			return $this->options[$option_name];
 		}
@@ -795,9 +625,11 @@ if( !class_exists('promo_slider') ){
 			if( get_option('disable_fancy_title') ) $options['disable_fancy_title'] = get_option('disable_fancy_title');
 			if( get_option('disable_fancy_nav') ) $options['disable_fancy_nav'] = get_option('disable_fancy_nav');
 			// Update auto_advance option due to change in values
-			if( $options['auto_advance'] == true ) $options['auto_advance'] = 'auto_advance';
-			elseif( $options['auto_advance'] == false ) $options['auto_advance'] = 'no_auto_advance';
-			else $options['auto_advance'] = 'auto_advance';
+			if( isset( $options['auto_advance'] ) ) {
+				if( true == $options['auto_advance'] ) $options['auto_advance'] = 'auto_advance';
+				elseif( false == $options['auto_advance'] ) $options['auto_advance'] = 'no_auto_advance';
+				else $options['auto_advance'] = 'auto_advance';
+			}
 			// Update depreciated options
 			if( isset($options['nav_option']) ) $options['display_nav'] = $options['nav_option'];
 			if( isset($options['disable_fancy_nav']) && $options['disable_fancy_nav'] != true ) $options['nav_option'] = 'fancy';
