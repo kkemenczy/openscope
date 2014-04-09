@@ -192,7 +192,9 @@
                                             $e->parent()->title = $e->title;
                                         }
                                         else {
-                                            $e->parent()->title = $postGroupTitle;
+                                           // $e->parent()->title = $postGroupTitle;
+                                           // Display image alt tag on gallery's URLs titles, instead of page title
+                                            $e->parent()->title = $e->attr[alt];
                                         }
                                     }
                                     if ($lightboxPlusOptions['use_caption_title']) {
