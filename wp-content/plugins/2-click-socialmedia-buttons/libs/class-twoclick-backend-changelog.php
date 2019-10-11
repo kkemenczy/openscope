@@ -46,7 +46,7 @@ if(!class_exists('Twoclick_Social_Media_Buttons_Backend_Changelog')) {
 		 * @author ppfeufer
 		 */
 		private function _get_changelog() {
-			$array_Changelog = $this->_get_changelog_from_reame();
+			$array_Changelog = $this->_get_changelog_from_readme();
 
 			if($array_Changelog === false) {
 				?>
@@ -114,7 +114,7 @@ if(!class_exists('Twoclick_Social_Media_Buttons_Backend_Changelog')) {
 		 * @since 1.0
 		 * @author ppfeufer
 		 */
-		private function _get_changelog_from_reame() {
+		private function _get_changelog_from_readme() {
 			$var_sReadme = @wp_remote_retrieve_body(wp_remote_get(TWOCLICK_PLUGIN_URI . 'readme.txt'));
 
 			if(is_wp_error($var_sReadme)) {
@@ -188,7 +188,7 @@ if(!class_exists('Twoclick_Social_Media_Buttons_Backend_Changelog')) {
 			} else {
 				return false;
 			} // END if(!empty($var_sReadme))
-		} // END private function _get_changelog_from_reame()
+		} // END private function _get_changelog_from_readme()
 	} // END class Twoclick_Social_Media_Buttons_Backend_Changelog extends Twoclick_Social_Media_Buttons_Backend
 
 	new Twoclick_Social_Media_Buttons_Backend_Changelog();
